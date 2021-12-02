@@ -26,131 +26,127 @@ document.addEventListener("DOMContentLoaded", () => {
 
   for (const e of document.querySelectorAll(".pl, .pl-table td"))
     e.innerHTML = f0(e.innerHTML);
-})
+});
 
-const convert0 = s =>
-  s
-    .toLowerCase()
-    .replace(/ó/g, "u")
-    .replace(/ch/g, "h")
-    .replace(/w/g, "v")
-    .replace(/sz/g, "ȟ")
-    .replace(/cz/g, "ǩ")
-    .replace(/ż/g, "ǧ")
+const convert0 = s => s
+  .toLowerCase()
+  .replace(/ó/g, "u")
+  .replace(/ch/g, "h")
+  .replace(/w/g, "v")
+  .replace(/sz/g, "ȟ")
+  .replace(/cz/g, "ǩ")
+  .replace(/ż/g, "ǧ")
 
-    .replace(/l/g, "lj")
-    .replace(/lji/g, "li")
-    .replace(/ł/g, "l")
-    .replace(/ł/g, "l")
-    .replace(/ri/g, "r'i")
-    .replace(/rzy/g, "ri")
-    .replace(/(?<!zama|mie)rz/g, "rj")
+  .replace(/(?<=[tdr])(?=i)/g, "'")
 
-    .replace(/(?<=[sz])j/g, "'j")
+  .replace(/l/g, "lj")
+  .replace(/lji/g, "li")
+  .replace(/ł/g, "l")
+  .replace(/ł/g, "l")
+  .replace(/rzy/g, "ri")
+  .replace(/(?<!zama|mie)rz/g, "rj")
 
-
-    .replace(/(?<=[td])(?=i)/g, "'")
-    .replace(/ć|ci(?=[eaouęąō])/g, "tj")
-    .replace(/ci/g, "ti")
-    .replace(/dź|dzi(?=[eaouęąō])/g, "dj")
-    .replace(/dzi/g, "di")
-
-    .replace(/ś/g, "sj")
-    .replace(/ź/g, "zj")
-    .replace(/ń/g, "nj")
-
-    .replace(/cji/g, "ci")
-
-    .replace(/i(?=[eaouęąō])/g, "j")
-    .replace(/i/g, "jy")
-
-    .replace(/(?<=[sz])jr/g, "rj")
-    .replace(/sjtj/g, "stj")
-    .replace(/zjdj/g, "zdj")
-    //.replace(/(?![yeaouęą])j([^yeaouęą])j/g, "$1j")
+  .replace(/(?<=[sz])j/g, "'j")
 
 
-    .replace(/dz/g, "ʒ")
+  .replace(/ć|ci(?=[eaouęąō])/g, "tj")
+  .replace(/ci/g, "ti")
+  .replace(/dź|dzi(?=[eaouęąō])/g, "dj")
+  .replace(/dzi/g, "di")
 
-    .replace(/^j(?=[ie])/g, "")
-    //.replace(/(?<=[ieaouęąō])j(?![ieaouęąō])/g, "i")
-    //.replace(/(?<=^|[ieaouęąō])j(?=[ieę])/g, "")
+  .replace(/ś/g, "sj")
+  .replace(/ź/g, "zj")
+  .replace(/ń/g, "nj")
 
-    .replace(/jy/g, "i")
-    .replace(/je/g, "ě")
+  .replace(/cji/g, "ci")
 
-    //.replace(/lj/g, "ľ")
-    //.replace(/rj/g, "ř")
-    //.replace(/nj/g, "ň")
-    //.replace(/tj/g, "ť")
-    //.replace(/dj/g, "ď")
-    //.replace(/sj/g, "š")
-    //.replace(/zj/g, "ž")
+  .replace(/i(?=[eaouęąō])/g, "j")
+  .replace(/i/g, "jy")
 
-    .normalize("NFC");
+  .replace(/(?<=[sz])jr/g, "rj")
+  .replace(/sjtj/g, "stj")
+  .replace(/zjdj/g, "zdj")
+  //.replace(/(?![yeaouęą])j([^yeaouęą])j/g, "$1j")
 
-const convert1 = (s, iotate) =>
-  s
-    .toLowerCase()
+  .replace(/dz/g, "ʒ")
 
-    .replace(/ľ/g, "lj")
-    .replace(/ř/g, "rj")
-    .replace(/ň/g, "nj")
-    .replace(/ť/g, "tj")
-    .replace(/ď/g, "dj")
-    .replace(/š/g, "sj")
-    .replace(/ž/g, "zj")
-    .replace(/i/g, "jy")
-    .replace(/y/g, "i")
-    .replace(/ě/g, "je")
+  .replace(/^j(?=[ie])/g, "")
+  //.replace(/(?<=[ieaouęąō])j(?![ieaouęąō])/g, "i")
+  //.replace(/(?<=^|[ieaouęąō])j(?=[ieę])/g, "")
 
-    .replace(/ō/g, "ѡ")
+  .replace(/jy/g, "i")
+  .replace(/je/g, "ě")
 
-    .replace(/ji/g, x => iotate ? "і" : x)
-    .replace(/je/g, x => iotate ? "ѥ" : x)
-    .replace(/ja/g, x => iotate ? "ꙗ" : x)
-    .replace(/jo/g, x => iotate ? "ю" : x)
-    .replace(/ju/g, x => iotate ? "ѵ" : x)
-    .replace(/ję/g, x => iotate ? "ѩ" : x)
-    .replace(/ją/g, x => iotate ? "ѭ" : x)
+  //.replace(/lj/g, "ľ")
+  //.replace(/rj/g, "ř")
+  //.replace(/nj/g, "ň")
+  //.replace(/tj/g, "ť")
+  //.replace(/dj/g, "ď")
+  //.replace(/sj/g, "š")
+  //.replace(/zj/g, "ž")
 
-    .replace(/i/g, x => iotate ? "ꙑ" : "и")
-    .replace(/e/g, "є")
-    .replace(/a/g, "а")
-    .replace(/o/g, "о")
-    .replace(/u/g, "у")
-    .replace(/ę/g, "ѧ")
-    .replace(/ą/g, "ѫ")
+  .normalize("NFC");
 
-    .replace(/p/g, "п")
-    .replace(/b/g, "б")
-    .replace(/f/g, "ф")
-    .replace(/v/g, "в")
-    .replace(/m/g, "м")
+const convert1 = (s, iotate) => s
+  .toLowerCase()
 
-    .replace(/k/g, "к")
-    .replace(/g/g, "г")
-    .replace(/h/g, "х")
+  .replace(/ľ/g, "lj")
+  .replace(/ř/g, "rj")
+  .replace(/ň/g, "nj")
+  .replace(/ť/g, "tj")
+  .replace(/ď/g, "dj")
+  .replace(/š/g, "sj")
+  .replace(/ž/g, "zj")
+  .replace(/i/g, "jy")
+  .replace(/ě/g, "je")
 
-    .replace(/t/g, "т")
-    .replace(/d/g, "д")
-    .replace(/s/g, "с")
-    .replace(/z/g, "з")
-    .replace(/n/g, "н")
-    .replace(/l/g, "л")
-    .replace(/r/g, "р")
+  .replace(/ō/g, "ѡ")
 
-    .replace(/ǩ/g, "ч")
-    .replace(/ǯ/g, "џ")
-    .replace(/ȟ/g, "ш")
-    .replace(/ǧ/g, "ж")
-    .replace(/c/g, "ц")
-    .replace(/ʒ/g, "ѕ")
+  .replace(/jy/g, x => iotate ? "і" : x)
+  .replace(/je/g, x => iotate ? "ѥ" : x)
+  .replace(/ja/g, x => iotate ? "ꙗ" : x)
+  .replace(/jo/g, x => iotate ? "ю" : x)
+  .replace(/ju/g, x => iotate ? "ѵ" : x)
+  .replace(/ję/g, x => iotate ? "ѩ" : x)
+  .replace(/ją/g, x => iotate ? "ѭ" : x)
 
-    .replace(/j/g, "ь")
-    .replace(/'/g, "ъ")
+  .replace(/y/g, x => iotate ? "ꙑ" : "и")
+  .replace(/e/g, x => iotate ? "є" : "е")
+  .replace(/a/g, "а")
+  .replace(/o/g, "о")
+  .replace(/u/g, "у")
+  .replace(/ę/g, "ѧ")
+  .replace(/ą/g, "ѫ")
 
-    .normalize("NFC");
+  .replace(/p/g, "п")
+  .replace(/b/g, "б")
+  .replace(/f/g, "ф")
+  .replace(/v/g, "в")
+  .replace(/m/g, "м")
+
+  .replace(/k/g, "к")
+  .replace(/g/g, "г")
+  .replace(/h/g, "х")
+
+  .replace(/t/g, "т")
+  .replace(/d/g, "д")
+  .replace(/s/g, "с")
+  .replace(/z/g, "з")
+  .replace(/n/g, "н")
+  .replace(/l/g, "л")
+  .replace(/r/g, "р")
+
+  .replace(/ǯ/g, "џ")
+  .replace(/ǩ/g, "ч")
+  .replace(/ȟ/g, "ш")
+  .replace(/ǧ/g, "ж")
+  .replace(/c/g, "ц")
+  .replace(/ʒ/g, "ѕ")
+
+  .replace(/j/g, "ь")
+  .replace(/'/g, "ъ")
+
+  .normalize("NFC");
 
 const capitalize = s => s.charAt(0).toUpperCase() + s.slice(1);
 
@@ -172,6 +168,6 @@ const replacePolishWordsKeepCase = (s, f) =>
   );
 
 const replaceNewPolishWordsKeepCase = (s, f) =>
-  s.replace(/[a-pr-vzōęąʒěǯǩǧȟťďšžňľř'\u030C]+/gi, word =>
+  s.replace(/[a-pr-vyzōęąʒěǯǩǧȟčšžż'\u030C]+/gi, word =>
     applyKeepCase(word, f)
   );
